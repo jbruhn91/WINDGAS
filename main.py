@@ -6,7 +6,7 @@ prices=df['PRICE'].tolist()
 power=df['P_WIND'].tolist()
 
 
-simulation_days=1
+simulation_days=7
 step_size=24
 opti_horizon=24*2
 eta_PEM=0.6
@@ -66,7 +66,7 @@ for i in range(simulation_days):
 		r_P_grid.append(P_grid[t].value())
 		r_P_charge.append(P_charge[t].value())
 		r_P_discharge.append(V_out[t].value() 	*	h/eta_T)
-
+'''
 fig, ax1 = plt.subplots()
 ax2 = ax1.twinx()
 ax1.plot(r_V_tank,	color='r',	label="V_Tank")
@@ -76,3 +76,8 @@ ax2.plot(r_P_discharge,color='y',	label="P_discharge")
 ax1.legend(loc="upper left")
 ax2.legend(loc="lower left")
 plt.show()
+'''
+
+df_OUT=pd.DataFrame({'V_Tank':r_V_tank,'P_charge':r_P_charge,'P_discharge':r_P_discharge})
+
+df_OUT.to_csv(r'OUTPUT.csv')
